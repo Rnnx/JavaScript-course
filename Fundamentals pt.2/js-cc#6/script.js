@@ -1,22 +1,13 @@
-const marksMass = document.querySelector('#mark-weight')
-const marksHeight = document.querySelector('#mark-height')
-const johnsMass = document.querySelector('#john-weight')
-const johnsHeight = document.querySelector('#john-height')
-const resultString = document.querySelector('#result')
-const compareBtn = document.querySelector('#compare-btn-id')
+bills = [125, 555, 44]
+tips = []
+total = []
 
-let markBMI
-let johnBMI
+const calcTip = billValue => billValue < 50 ? 0 : billValue >= 50 && billValue < 300 ? 0.15 * billValue : 0.2 * billValue
 
-compareBtn.addEventListener('click', function() {
-    markBMI = calculateBMI(marksMass.value, marksHeight.value)
-    johnBMI = calculateBMI(johnsMass.value, johnsHeight.value)
-
-    resultString.textContent = ( markBMI > johnBMI ? `Mark's BMI (${markBMI}) is higher than John's (${johnBMI})` : 
-    markBMI === johnBMI ? `Guys BMI's are the same lol` : `John's BMI (${johnBMI}) is higher than Mark's (${markBMI})` )
-})
-
-function calculateBMI(mass, height) {
-    let bmi = mass / height ** 2
-    return bmi
+for(let bill of bills) {
+    tips.push(calcTip(bill))
+    total.push(bill + calcTip(bill))
 }
+
+console.log(tips)
+console.log(total)
