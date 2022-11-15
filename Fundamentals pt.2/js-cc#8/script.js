@@ -1,11 +1,16 @@
-const billValue = 100
 
-const tip = billValue < 50 ? 0 :
-            billValue >= 50 && billValue < 300 ? getTheTip(15) :
-            getTheTip(20)
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52]
+const tips = []
+const totals = []
 
-console.log(`The bill was ${billValue}, the tip was ${tip}, and the total value ${billValue + tip}`)
+const calcTip = billValue => billValue < 50 ? 0 :
+                billValue >= 50 && billValue < 300 ? billValue * .15 :
+                billValue * .2
 
-function getTheTip(tipPercentage) {
-    return Math.round(tipPercentage * billValue / 100)
+for (const bill of bills) {
+    const tip = calcTip(bill)
+    tips.push(tip)
+    totals.push(bill + tip)
 }
+
+const calcAverage = arr => arr.reduce((a, b) => a + b, 0) / arr.length

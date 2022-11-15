@@ -133,3 +133,36 @@ jarek.calcAge()
 console.log(jarek['age'])
 
 jarek.printInfo()
+
+// iterations
+// regular for loop
+const exampleArray = []
+for (let i = 0; i < 10; i++) {
+    exampleArray.push(i)
+}
+console.log(exampleArray)
+
+// looping backwards
+for (let i = friends.length - 1; i >= 0; i--){
+    console.log(friends[i])
+}
+
+// loop in loop
+for (let i = friends.length - 1; i >= 0; i--){
+    for (let j = 0; j < friends.length; j++){
+        console.log(`${friends[i]} has a friend called ${friends[j]}`)
+    }
+}
+
+// basic while loops
+let rep = 1
+while (rep < 10) {
+   rep++ 
+}
+console.log(rep)
+
+let dice = 0
+while(dice !== 6) {
+    dice = Math.trunc(Math.random() * 6) + 1
+    dice === 6 ? console.log(`You rolled a ${dice}, Loop is about to end...`) : console.log(`You rolled a ${dice}`)
+}
