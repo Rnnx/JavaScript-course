@@ -24,6 +24,7 @@ let score = 0
 let player0CurrentScore = 0
 let player1CurrentScore = 0
 let activePlayer = checkActivePlayer()
+hideDice()
 
 const diceRoll = function() {
     return Math.floor(Math.random() * 6) + 1
@@ -31,6 +32,8 @@ const diceRoll = function() {
 
 function resetScore() {
     score = 0
+    score0.textContent = 0
+    score1.textContent = 0
 }
 
 function hideDice() {
@@ -59,7 +62,7 @@ function displayDice(roll) {
 function updateScore(roll) {
     if (roll === 1)
     {
-        resetCurrentScore()
+        resetCurrentScore(activePlayer)
         resetScore()
         switchPlayers()
         hideDice()
@@ -96,8 +99,8 @@ function checkActivePlayer() {
     }
 }
 
-function resetCurrentScore() {    
-    if (activePlayer === player0)
+function resetCurrentScore(player) {    
+    if (player === player0)
     {
         player0CurrentScore = 0
         currentScore0.textContent = player0CurrentScore
@@ -122,8 +125,23 @@ function updateCurrentScore() {
     }
 }
 
-function declareWinner() {
-    hideDice()
+function declareWinner(player) {
+    dice.src = `images/victory.png`
+    player.classList.add('player--winner')
+}
+
+function disableButtons() {
+    btnDiceRoll.disabled = true
+    btnHold.disabled = true
+}
+
+function enableButtons() {
+    btnDiceRoll.disabled = false
+    btnHold.disabled = false
+}
+
+function resetBackground() {
+    activePlayer.classList.remove('player--winner')
 }
 
 btnDiceRoll.addEventListener('click', function() {
@@ -134,12 +152,26 @@ btnDiceRoll.addEventListener('click', function() {
 btnHold.addEventListener('click', function() {
     updateCurrentScore()
 
-    if (currentScore0 >= 100 || currentScore1 >= 100)
+    if (Number(currentScore0.textContent) >= 100 || Number(currentScore1.textContent) >= 100)
     {
-        declareWinner()
+        resetScore()
+        disableButtons()
+        declareWinner(activePlayer)
     }
+    else
+    {
+        resetScore()
+        switchPlayers()
+        hideDice()
+        enableButtons()
+    }
+})
 
+btnNewGame.addEventListener('click', function() {
+    resetBackground()
     switchPlayers()
-    resetScore()
+    enableButtons()
     hideDice()
+    resetCurrentScore(player0)
+    resetCurrentScore(player1)
 })
