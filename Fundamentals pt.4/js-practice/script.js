@@ -1,5 +1,9 @@
 "use strict"
 
+// --------------------
+// SCOPING
+// --------------------
+
 function calcAge(birthYear) {
     const age = new Date().getFullYear() - birthYear
     
@@ -40,3 +44,41 @@ const firstName = "Karol"
 calcAge(1994)
 
 // printAge() - in this scope the function is unaccessible (Reference Error)
+
+// --------------------
+// HOISTING AND TDZ
+// --------------------
+
+// VARIABLES
+// console.log(me) - var's are not hoisted, therefore we get a Reference Error
+
+// let's and const's are hoisted but we get another error (can't access lexical declaration before initialization) !- TDZ -!
+// console.log(job)
+// console.log(year)
+
+var me = "Karol"
+let job = "teacher"
+const year = 1994
+
+// FUNCTIONS
+// working fine
+console.log(addDecl(2, 3))
+// console.log(addExpr(2, 3)) - can't access lexical declaration before initialization !- TDZ -!
+// console.log(addArrow(2, 3)) - can't access lexical declaration before initialization !- TDZ -!
+
+function addDecl(a, b) {
+    return a + b
+}
+const addExpr = function(a, b) {
+    return a + b
+}
+const addArrow = (a, b) => a + b
+
+// Example - because of hoisting We meet the requirement for deleting all products from shopping cart
+if (!numProducts) deleteShoppingCart()
+
+var numProducts = 10
+
+function deleteShoppingCart() {
+    console.log("All products deleted!")
+}
