@@ -18,13 +18,13 @@ const player1 = document.querySelector('.player--1')
 // starting conditions
 score0.textContent = 0
 score1.textContent = 0
+hideDice()
 
 // state variables
 let score = 0
 let player0CurrentScore = 0
 let player1CurrentScore = 0
 let activePlayer = checkActivePlayer()
-hideDice()
 
 const diceRoll = function() {
     return Math.floor(Math.random() * 6) + 1
