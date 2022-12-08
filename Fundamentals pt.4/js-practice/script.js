@@ -147,3 +147,10 @@ const friend = mySelf
 friend.age = 19
 console.log(`Friend: ${friend.age}`)
 console.log(`Me: ${mySelf.age}`)
+
+// copying objects
+const friendCopy = Object.assign({}, friend) // shallow copy, still points to the same memory address, only copies the properties in the first level (doesn't copy reference types from the original object)
+friendCopy.age = 999
+console.log(`New friend: ${friendCopy.age}`)
+
+// deep clones later :)
