@@ -211,3 +211,12 @@ Copy Restaurant name: ${restaurantCopy.name}`);
 // --------------------
 // REST PATTERN AND PARAMETERS
 // --------------------
+// SPREAD, because on RIGHT side of '='
+const newArr = [1, 2, ...[3, 4]];
+
+// REST, because on LEFT side of '+'
+
+const [k, l, ...others] = [1, 2, 3, 4, 5];
+console.log(`k: ${k}
+l: ${l}
+others: ${others}`);
