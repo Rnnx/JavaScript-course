@@ -38,6 +38,10 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is Your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
   },
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 // the order of the passed object doesn't have to match the order of declaration inside the restaurant object!
 restaurant.orderDelivery({
@@ -211,12 +215,91 @@ Copy Restaurant name: ${restaurantCopy.name}`);
 // --------------------
 // REST PATTERN AND PARAMETERS
 // --------------------
+
 // SPREAD, because on RIGHT side of '='
 const newArr = [1, 2, ...[3, 4]];
 
 // REST, because on LEFT side of '+'
-
 const [k, l, ...others] = [1, 2, 3, 4, 5];
 console.log(`k: ${k}
 l: ${l}
 others: ${others}`);
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood);
+
+// objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+
+// functions
+const add = function (...numbers) {
+  let sum = 0;
+  numbers.forEach((e) => {
+    sum += e;
+  });
+  console.log(sum);
+};
+add(2, 3);
+add(4, 5, 6, 7);
+add(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+// if We want to pass an array to a function with rest parameters,
+// We have to use the spread operator :)
+const d = [23, 5, 7];
+add(...d);
+
+restaurant.orderPizza("mushrooms", "onion", "olives", "spinach");
+
+// --------------------
+// SHORT CIRCUITING
+// --------------------
+
+console.log(null || undefined); // the last value will be returned
+
+console.log("Hello" && 23 && null && "Geralt"); // null will be returned
+
+// practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPasta("mushrooms", "spinach");
+}
+// above example can be changed to using the short circuiting
+restaurant.orderPizza && restaurant.orderPizza("mushrooms", "spinach");
+// because first
+
+// THE NULLISH COALLESCING OPERATOR
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+// --------------------
+// LOGICAL ASSIGNMENT OPERATORS
+// --------------------
+
+const rest1 = {
+  name: "Capri",
+  numGuests: 20,
+};
+
+const rest2 = {
+  name: "Capri",
+  owner: "Giovanni Rossi",
+};
+
+// logical assignment 'or'
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+// logical assignment 'nullish'
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// logical assignment 'and'
+rest1.owner &&= "<anonymous>";
+rest2.owner &&= "<anonymous>";
+
+console.log(rest1);
+console.log(rest2);
