@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 const restaurant = {
-  name: "Classico Italiano",
-  location: "Via Angelo Tavanti 23, Firenze, Italy",
-  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
-  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
-  mainMenu: ["Pizza", "Pasta", "Risotto"],
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
   openingHours: {
     thu: {
       open: 12,
@@ -28,7 +28,7 @@ const restaurant = {
   orderDelivery: function ({
     starterIndex = 1,
     mainIndex = 0,
-    time = "22:30",
+    time = '22:30',
     address,
   }) {
     console.log(
@@ -45,8 +45,8 @@ const restaurant = {
 };
 // the order of the passed object doesn't have to match the order of declaration inside the restaurant object!
 restaurant.orderDelivery({
-  time: "22:30",
-  address: "Via del Sole, 21",
+  time: '22:30',
+  address: 'Via del Sole, 21',
   mainIndex: 2,
   starterIndex: 2,
 });
@@ -173,7 +173,7 @@ console.log(
 // the spread operator
 console.log(...goodNewArr);
 
-const newMenu = ["Burger", ...restaurant.mainMenu];
+const newMenu = ['Burger', ...restaurant.mainMenu];
 console.log(newMenu);
 
 // spread operator for creating a shallow copy of the array (object)
@@ -185,8 +185,8 @@ const joinedMenus = [...restaurant.starterMenu, ...restaurant.mainMenu];
 console.log(joinedMenus);
 
 // spread operator on String
-const str = "Karol";
-const strPlus = [...str, ..."is a hero!"];
+const str = 'Karol';
+const strPlus = [...str, ...'is a hero!'];
 console.log(strPlus);
 
 const ingredients = [
@@ -203,12 +203,12 @@ restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
 restaurant.orderPasta(...ingredients);
 
 // objects - since ES6
-const newRestaurant = { fountedIn: 1998, ...restaurant, founder: "Guiseppe" };
+const newRestaurant = { fountedIn: 1998, ...restaurant, founder: 'Guiseppe' };
 console.log(newRestaurant);
 
 // objects - shallow copy
 const restaurantCopy = { ...restaurant };
-restaurantCopy.name = "Ristorante Roma";
+restaurantCopy.name = 'Ristorante Roma';
 console.log(`Restaurant name: ${restaurant.name}
 Copy Restaurant name: ${restaurantCopy.name}`);
 
@@ -238,7 +238,7 @@ console.log(weekdays);
 // functions
 const add = function (...numbers) {
   let sum = 0;
-  numbers.forEach((e) => {
+  numbers.forEach(e => {
     sum += e;
   });
   console.log(sum);
@@ -252,7 +252,7 @@ add(1, 2, 3, 4, 5, 6, 7, 8, 9);
 const d = [23, 5, 7];
 add(...d);
 
-restaurant.orderPizza("mushrooms", "onion", "olives", "spinach");
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
 
 // --------------------
 // SHORT CIRCUITING
@@ -260,14 +260,14 @@ restaurant.orderPizza("mushrooms", "onion", "olives", "spinach");
 
 console.log(null || undefined); // the last value will be returned
 
-console.log("Hello" && 23 && null && "Geralt"); // null will be returned
+console.log('Hello' && 23 && null && 'Geralt'); // null will be returned
 
 // practical example
 if (restaurant.orderPizza) {
-  restaurant.orderPasta("mushrooms", "spinach");
+  restaurant.orderPasta('mushrooms', 'spinach');
 }
 // above example can be changed to using the short circuiting
-restaurant.orderPizza && restaurant.orderPizza("mushrooms", "spinach");
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
 // because first
 
 // THE NULLISH COALLESCING OPERATOR
@@ -280,13 +280,13 @@ console.log(guests);
 // --------------------
 
 const rest1 = {
-  name: "Capri",
+  name: 'Capri',
   numGuests: 20,
 };
 
 const rest2 = {
-  name: "Capri",
-  owner: "Giovanni Rossi",
+  name: 'Capri',
+  owner: 'Giovanni Rossi',
 };
 
 // logical assignment 'or'
@@ -298,8 +298,64 @@ rest1.numGuests ??= 10;
 rest2.numGuests ??= 10;
 
 // logical assignment 'and'
-rest1.owner &&= "<anonymous>";
-rest2.owner &&= "<anonymous>";
+rest1.owner &&= '<anonymous>';
+rest2.owner &&= '<anonymous>';
 
 console.log(rest1);
 console.log(rest2);
+
+// --------------------
+// OPTIONAL CHAINING
+// --------------------
+
+// old way of dealing with chains of properties that we don't if they exist
+if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon.open);
+
+// optional chaining ES6
+console.log(restaurant.openingHours.mon?.open);
+
+// real world example
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for (const day of days) {
+  const openHours = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, We open at ${openHours}.`);
+}
+
+// methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist.');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist.');
+
+// arrays
+const users = [
+  {
+    name: 'Karol',
+    email: 'mail@mail.com',
+  },
+];
+console.log(users[0]?.name ?? 'User array empty');
+console.log(users[1]?.name ?? 'User array empty');
+
+// --------------------
+// LOOPING
+// --------------------
+
+// looping with object keys
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+for (const day of Object.keys(openingHours)) {
+  console.log(day);
+}
+
+// property values
+const values = Object.values(openingHours);
+console.log(values);
+
+// entrie object
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} We open at ${open} and close at ${close}.`);
+}
