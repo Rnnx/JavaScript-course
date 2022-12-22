@@ -149,3 +149,103 @@ console.log(question.get(answer === question.get('correct')));
 // converting map to array
 const mapToArray = [...question];
 console.log(mapToArray);
+
+// --------------------
+// STRINGS
+// --------------------
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+// index of (if -1 is returned then the argument passed to function didn't exist in string)
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+
+// slice
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7)); // never reaches the index specified in second argument
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ')));
+
+console.log(airline.slice(-2)); // starts 2 indexes before last char
+console.log(airline.slice(1, -1)); // starts at second char and cuts the last one
+
+// to lower/upper case
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+// compare 2 emails
+const email = 'karol@gmail.com';
+const loginEmail = '    karoL@GMAil.cOm \n';
+
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+
+email === trimmedEmail
+  ? console.log('Both are the same')
+  : console.log('One is fucked');
+
+// replace
+const priceGB = '288,97&';
+const priceUS = priceGB.replace('&', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23, Boarding door 23!';
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replaceAll('door', 'gate'));
+
+// replace with regex
+console.log(announcement.replace(/door/g, 'gate'));
+
+// booleans (indludes, startsWith, endsWith)
+const myPlane = 'A320neo';
+console.log(myPlane.includes('A320'));
+console.log(myPlane.startsWith('A320'));
+console.log(myPlane.endsWith('eo'));
+
+// split and join
+console.log('a+very+nice+string'.split('+'));
+console.log('Jonas Schmedtmann'.split(' '));
+
+const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('jonas schmedtmann');
+
+// padding
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '+').padEnd(30, '+'));
+console.log('Jonas'.padStart(20, '+').padEnd(30, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+console.log(maskCreditCard(64637836));
+console.log(maskCreditCard(43378463864647384));
+console.log(maskCreditCard('334859493847755774747'));
+
+// repeat
+const message2 = 'Bad waether... All Departues Delayed... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛩'.repeat(n)}`);
+};
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
