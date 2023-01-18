@@ -115,3 +115,41 @@ console.log(dArr.at(0)); // 'at' method
 // the usefulness of the 'at' method is getting the last element of the array
 console.log(dArr[dArr.length - 1]); // the old way
 console.log(dArr.at(-1));
+
+// --------------------
+// Fore each
+// --------------------
+const exampleMovements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// note! forEach() doesn't have the 'break' or 'continue' methods. It'll alway loop through the whole array
+exampleMovements.forEach(function (mov, i, arr) {
+  // names or parameters don't matter, but the order does!
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
+});
+
+// getting a courter from forEach()
+exampleMovements.forEach(function (movement) {});
+
+// forEach() with maps
+const exampleCurrencies = new Map([
+  ['USD', 'United States Dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound Sterling'],
+]);
+
+exampleCurrencies.forEach(function (currentValue, key, map) {
+  console.log(`${key}: ${currentValue}`);
+});
+
+// forEach() with sets
+const uniqueCurrencies = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(uniqueCurrencies);
+
+// current value in sets is the same as key!
+uniqueCurrencies.forEach(function (currentValue, key, set) {
+  console.log(`${key}: ${currentValue}`);
+});
