@@ -249,3 +249,67 @@ btnSort.addEventListener('click', function (e) {
 // --------------------
 // Lectures
 // --------------------
+
+// --------------------
+// Conversion from string to number
+
+// using global function call 'Number'
+console.log(Number('23'));
+
+// using '+' sign as JS will automatically convert (coerse) it thinking it should be a number
+console.log(+'23');
+
+// parsing
+console.log(Number.parseInt('30px')); // NOTE: It'll even try to convert the string with chars inside, but only if the beginning of string is a number
+
+// parsing takes 2 parameters, the second one is the base for numbering system
+console.log(Number('444', 10));
+console.log(Number.parseFloat('2.5'));
+
+// isNaN()
+console.log(Number.isNaN(20)); // false
+console.log(Number.isNaN('x20')); // false
+console.log(Number.isNaN(+'20px')); // true
+console.log(Number.isNaN(23 / 0)); // false - even tho it should be infinity
+
+// because of 'Number.isNaN(23 / 0)' resulting in false there is another function
+// isFinite() - which will result in the opposite of the isNaN()
+console.log(Number.isFinite('20')); // false
+console.log(Number.isFinite(23 / 0)); // false but we
+
+// --------------------
+// Math and rounding
+
+// square root and cubic root
+console.log(Math.sqrt(25));
+console.log(25 ** (1 / 2));
+console.log(8 ** (1 / 3));
+
+// max / min
+console.log(Math.max(5, 18, 23, 12, 2));
+console.log(Math.max(5, 18, '23', 12, 2)); // makes a coersion
+console.log(Math.max(5, 18, '23px', 12, 2)); // but does not make a parsing!
+
+console.log(Math.min(5, 18, '23', 12, 2));
+
+// constans
+console.log(Math.PI);
+
+// random
+console.log(Math.random() * 6); // in range of <0, 1>
+console.log(Math.trunc(Math.random() * 6)); // in range of <0, 5>
+
+const randomInt = (min, max) =>
+  Math.trunc(Math.random() * (max - min) + 1) + min; // function for calculating a random number in given range
+// 0...1 -> 0...(max - min) -> min...max
+console.log(randomInt(10, 12));
+
+// rounding integers (all these methods do type coersion)
+console.log(Math.trunc(23.3)); // Math.trunc()
+console.log(Math.round(23.3)); // Math.round()
+console.log(Math.ceil(23.3)); // Math.ceil() - the best one since it covers the negative numbers
+console.log(Math.floor(23.3)); // Math.floor() - the best one since it covers the negative numbers
+
+// rounding decimals
+console.log((2.7).toFixed(0)); // it returns a String! Solution to that below:
+console.log(+(2.7097532).toFixed(5)); // the one and loved '+' sign
