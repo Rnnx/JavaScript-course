@@ -262,7 +262,7 @@ console.log(+'23');
 // parsing
 console.log(Number.parseInt('30px')); // NOTE: It'll even try to convert the string with chars inside, but only if the beginning of string is a number
 
-// parsing takes 2 parameters, the second one is the base for numbering system
+// parsing takes 2 parameters, the second one is the base for numeric system
 console.log(Number('444', 10));
 console.log(Number.parseFloat('2.5'));
 
@@ -313,3 +313,49 @@ console.log(Math.floor(23.3)); // Math.floor() - the best one since it covers th
 // rounding decimals
 console.log((2.7).toFixed(0)); // it returns a String! Solution to that below:
 console.log(+(2.7097532).toFixed(5)); // the one and loved '+' sign
+
+// --------------------
+// Remainder operator
+
+console.log(5 % 2);
+
+const isEven = number => number % 2 === 0;
+console.log(isEven(2));
+
+// --------------------
+// Numeric separators
+
+const diamater = 287_460_000_000;
+console.log(diamater);
+
+const priceCents = 345_99;
+console.log(priceCents);
+
+// --------------------
+// BidInt
+console.log(2 ** 53 - 1); // the biggest base 64 int value over base 2 numeric system
+console.log(Number.MAX_SAFE_INTEGER);
+
+console.log(23234645745675763452352352524574457n); // BIG INT
+console.log(BigInt(23234645745675763452352352524574457));
+
+// operations (work mostly the same as normal)
+console.log(10000n + 10000n);
+console.log(21479102470192748901624071249017240n * 10000000n);
+
+// exception (can't mix BigInt with regular types)
+const huge = 14122351534234562162346234523412n;
+const normal = 23;
+// console.log(huge * normal); // resulting in error!
+
+// exception (division)
+console.log(10n / 3n); // = 3n // cuts off the decimal part!
+console.log(10 / 3); // = 3.3333333...
+
+// also generic functions like the whole Math. lib won't work on BigInts
+// console.log(Math.sqrt(huge, 2)); // resulting in error!
+
+//the exception to above is some logic operators and string concatenations
+console.log(20n > 15);
+console.log(20n < 15);
+console.log(huge + ' is a really huge number!');
