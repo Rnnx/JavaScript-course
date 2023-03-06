@@ -10,7 +10,7 @@ const account1 = {
   interestRate: 1.2, // %
   pin: 1111,
 };
-
+//comment.2
 const account2 = {
   owner: 'Jessica Davis',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
