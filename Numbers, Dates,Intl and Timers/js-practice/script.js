@@ -355,7 +355,63 @@ console.log(10 / 3); // = 3.3333333...
 // also generic functions like the whole Math. lib won't work on BigInts
 // console.log(Math.sqrt(huge, 2)); // resulting in error!
 
-//the exception to above is some logic operators and string concatenations
+// the exception to above is some logic operators and string concatenations
 console.log(20n > 15);
 console.log(20n < 15);
 console.log(huge + ' is a really huge number!');
+
+// --------------------
+// Dates
+
+// creating a date
+// creating an object
+const now = new Date();
+console.log(now);
+
+// from date string
+console.log(new Date('Aug 02 2020 18:05:41'));
+console.log(new Date('December 24, 2023'));
+console.log(new Date(account1.movementsDates[0]));
+
+// from another objects like year, month, day etc.
+console.log(new Date(2037, 10, 19, 15, 21, 5));
+console.log(new Date(2037, 10, 19));
+
+// passing time that went from the beginning of Unix Time (in ms)
+console.log(new Date(0));
+// example: 3 days after the above
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); //no. of days times hours, min, sec, and ms
+
+console.log(`****************************************`);
+
+// working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear()); // get year from date
+console.log(future.getYear()); // this is some shit lol
+console.log(future.getMonth()); // get month from date (0 based)
+console.log(future.getDate()); // get day from the date (1 based)
+console.log(future.getDay()); // get day of the week from the date (0 based)
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString()); // get date as string that conforms to the ISO standard
+
+const futureTimeStamp = future.getTime();
+console.log(futureTimeStamp); // get timestamp from date
+// when we pass a timestamp to a new Date constructor we will get the exact same date that would generate given timestamp
+console.log(new Date(futureTimeStamp));
+
+console.log(Date.now()); // current timestamp (the moment it was instantiated)
+
+// dates can also be change using set methods
+future.setFullYear(2140);
+console.log(future);
+
+// --------------------
+// Operations with dates
+const calcDaysPassed = (date1, date2) =>
+  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+const example1 = calcDaysPassed(future, Date.now());
+console.log(example1);
