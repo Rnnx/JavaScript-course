@@ -408,10 +408,91 @@ console.log(Date.now()); // current timestamp (the moment it was instantiated)
 future.setFullYear(2140);
 console.log(future);
 
-// --------------------
-// Operations with dates
+// operations with dates (example)
 const calcDaysPassed = (date1, date2) =>
   Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
 
 const example1 = calcDaysPassed(future, Date.now());
 console.log(example1);
+
+// internationalizing Dates (Intl)
+const nowEU = new Intl.DateTimeFormat('en-GB').format(now);
+console.log(nowEU);
+const nowUS = new Intl.DateTimeFormat('en-US').format(now);
+console.log(nowUS);
+const nowSY = new Intl.DateTimeFormat('ar-SY').format(now);
+console.log(nowSY);
+
+const optionsDates = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  weekday: 'long',
+};
+
+const nowWithOptionsEU = new Intl.DateTimeFormat('en-GB', optionsDates).format(
+  now
+);
+console.log(nowWithOptionsEU);
+
+// taking localization from the browser
+const locale = navigator.language;
+const nowWithOptionsLocale = new Intl.DateTimeFormat(
+  locale,
+  optionsDates
+).format(now);
+console.log(nowWithOptionsLocale);
+
+// --------------------
+// Internationalizing numbers
+const num = 3158721.23;
+
+const numEU = new Intl.NumberFormat('de-DE').format(num);
+console.log(numEU);
+const numUS = new Intl.NumberFormat('en-US').format(num);
+console.log(numUS);
+const numSY = new Intl.NumberFormat('ar-SY').format(num);
+console.log(numSY);
+const numLocale = new Intl.NumberFormat(locale).format(num);
+console.log(numLocale);
+
+const optionsNum = {
+  style: 'unit',
+  unit: 'mile-per-hour',
+};
+const numWithOptionsLocale = new Intl.NumberFormat('en-US', optionsNum).format(
+  num
+);
+console.log(numWithOptionsLocale);
+
+// --------------------
+// Timers: setTimeout(), and setInterval()
+
+// setTimeout()
+setTimeout(() => console.log(`Here is Your pizza! 🍕`), 3000); // delaying console log by 3s
+console.log(`Waiting...`);
+
+// above with arguments
+setTimeout(
+  (ing1, ing2) =>
+    console.log(`Here is Your pizza with ${ing1}, and ${ing2}! 🍕`),
+  3000,
+  'olives',
+  'spinach'
+);
+
+// cancelling the timeout before the specified delay passed
+const ingredients = ['salami', 'double cheese'];
+
+const myTimer = setTimeout(
+  (ing1, ing2) =>
+    console.log(`Here is Your pizza with ${ing1}, and ${ing2}! 🍕`),
+  3000,
+  ...ingredients
+);
+if (ingredients.includes('salami')) clearTimeout(myTimer);
+
+// setInterval()
+// setInterval(() => console.log(new Date()), 1000);
