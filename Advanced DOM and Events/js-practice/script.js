@@ -1,6 +1,6 @@
 'use strict';
 
-// --------------------
+// ---------------------
 // Modal window (like at the beginning of the course)
 
 const modal = document.querySelector('.modal');
