@@ -1,12 +1,18 @@
 'use strict';
 
-// ---------------------
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// ---------------------
+// Modal window
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -233,7 +239,7 @@ const slider = function () {
       (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
     );
   };
-  
+
   // Next slide
   const nextSlide = function () {
     if (curSlide === maxSlide - 1) {
@@ -263,3 +269,43 @@ const slider = function () {
     activateDot(0);
   };
   init();
+};
+
+// --------------------
+// Lectures
+
+// Selecting Elements
+console.log(document.documentElement);
+document.querySelector('.header');
+const allMySections = document.querySelectorAll('.section');
+console.log(allMySections);
+
+console.log(document.getElementsByTagName('button'));
+console.log(document.getElementsByClassName('btn'));
+
+// Creating and inserting elements
+// .insertAdjacentHTML - check in the previous course section
+
+const message = document.createElement('div'); // create element
+message.classList.add('cookie-message'); // add a class to it
+message.innerHTML = `We use cookies for improved functionality and 
+analytics. <button class="btn btn--close-cookie">Got it!</button>`;
+
+// Below code will place only one message. It happens because the way we
+// created it is as it was a DOM Element, therefore only one instance of
+// exactly the same entity can be added to DOM. If we wanted to add more
+// elements of similar or the same behaviour we would have to distinguish
+// them from one another (using the cloneNode() method!
+
+// header.prepend(message); // insertion
+header.append(message); // just moving it from first to last child
+
+// cloneNode()
+// header.append(message.cloneNode(true)); // all the child elements will also be copied
+
+// Delete the element
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', function () {
+    message.remove();
+  });
