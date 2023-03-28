@@ -309,3 +309,49 @@ document
   .addEventListener('click', function () {
     message.remove();
   });
+
+// Styles
+message.style.background = '#37383D';
+message.style.width = '120%';
+
+console.log(message.style.height); // only working for in-line styles (like thoe one we declared above!)
+console.log(message.style.background); // working for that one
+
+// for non in-line styles we use method getComputedStyle()
+console.log(getComputedStyle(message).height);
+
+// use above to increase the value that already exists
+const myHeight = parseInt(getComputedStyle(message).height, 10) + 20;
+message.style.height = myHeight + 'px';
+
+console.log(getComputedStyle(message).height);
+
+// method setProperty()
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes
+// get
+const myLogo = document.querySelector('.nav__logo');
+console.log(myLogo.alt); // get default attributes
+console.log(myLogo.src);
+
+console.log(myLogo.getAttribute('designer')); // get custom attributes
+
+// set
+myLogo.alt = 'Not my logo'; // set default attributes
+myLogo.setAttribute('designer', 'Karol Dev'); // custom attributes
+console.log(
+  `alt: ${myLogo.alt} | designer: ${myLogo.getAttribute('designer')}`
+);
+
+// special attributes
+console.log(myLogo.dataset.versionNumber);
+
+// Classes
+myLogo.classList.add('c');
+myLogo.classList.remove('c');
+myLogo.classList.toggle('c');
+myLogo.classList.contains('c');
+
+// don't use
+// myLogo.className = 'lol'
