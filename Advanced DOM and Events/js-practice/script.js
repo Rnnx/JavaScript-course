@@ -380,3 +380,30 @@ const randomInt = (min, max) =>
 //   console.log('NAV');
 //   this.style.backgroundColor = randomColor();
 // });
+
+// DOM Traversing
+const h1 = document.querySelector('h1');
+
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight')); // inne elementy z klasą .highlight nie zostaną wybrane, ponieważ nie są dzieckiem elementu 'h1'
+
+console.log(h1.childNodes); // only direct children, returns all kinds of data
+console.log(h1.children); // returns HTMLCollection
+console.log(window.getComputedStyle(h1.firstElementChild)); // first child element
+console.log(h1.lastElementChild);
+
+// Going upwards: parent
+console.log(h1.parentNode); // direct parent node
+console.log(h1.parentElement); // direct parent element
+
+console.log(h1.closest('.header')); // selecting the closest parent with .header class
+
+// Going sideways: siblings
+console.log(h1.previousSibling); // previous sibling node
+console.log(h1.nextSibling); // next sibling node
+console.log(h1.previousElementSibling); // previous siblind element
+console.log(h1.nextElementSibling); // next siblind element
+
+// if we want all the sibling we have to use a workaround
+// we select the parent element and then all of its children
+console.log(h1.parentElement.children); // all the siblings including itself
