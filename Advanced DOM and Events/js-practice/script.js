@@ -407,3 +407,5 @@ console.log(h1.nextElementSibling); // next siblind element
 // if we want all the sibling we have to use a workaround
 // we select the parent element and then all of its children
 console.log(h1.parentElement.children); // all the siblings including itself
+
+// Sticky navigation
